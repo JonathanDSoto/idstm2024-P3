@@ -27,7 +27,7 @@ public class Ventana extends JFrame{
 		
 		JPanel login = new JPanel();
 		login.setSize(this.getWidth(), this.getHeight());
-		login.setBackground(Color.red);
+		login.setBackground(Color.gray);
 		
 		this.add(login);
 		
