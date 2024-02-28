@@ -4,14 +4,20 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -38,9 +44,11 @@ public class Ventana extends JFrame{
 	
 	public void iniciarComponentes() {
 		
-		this.login();
+		//this.login();
+		//this.registro();
+		//this.admin();
 		
-		this.registro();
+		//this.calculadora();
 		
 		this.repaint();
 		this.validate();
@@ -61,6 +69,12 @@ public class Ventana extends JFrame{
 		login_tag.setOpaque(true);
 		login_tag.setBackground(Color.red);
 		login.add(login_tag);
+		
+		
+		JLabel logo = new JLabel(); 
+		logo.setIcon( new ImageIcon(getClass().getResource("polluelo.png")) );
+		logo.setBounds(100, 50, 100, 100);
+		login.add(logo);
 		
 		
 		JLabel usr_tag = new JLabel("NOMBRE DE USUARIO: ");
@@ -102,9 +116,7 @@ public class Ventana extends JFrame{
 		
 		this.add(login);
 		
-		
 	}
-	
 	
 	public void registro() {
 		
@@ -202,6 +214,122 @@ public class Ventana extends JFrame{
 		registro.add(rgs_btn);
 		
 		this.add(registro); 
+		
+	}
+
+	public void admin() {
+		
+		//panel 
+		JPanel admin_panel = new JPanel();
+		admin_panel.setSize(this.getWidth(), this.getHeight());
+		admin_panel.setLocation(0,0);
+		admin_panel.setBackground(Color.decode("#6DE19B"));
+		admin_panel.setLayout(null);
+		
+		//menu y opciones
+		JMenuBar barra = new JMenuBar(); 
+		JMenu menu_file = new JMenu("Archivo"); 
+		JMenuItem open_item = new JMenuItem("Abrir archivo ...");
+		JMenuItem create_item = new JMenuItem("Crear archivo ...");
+		
+		barra.add(menu_file);
+		barra.setOpaque(true);
+		barra.setBackground(Color.pink);
+		
+		menu_file.add(open_item);
+		
+		menu_file.setOpaque(true);
+		menu_file.setBackground(Color.DARK_GRAY);
+		
+		open_item.setOpaque(true);
+		open_item.setBackground(Color.red);
+		
+		menu_file.add(create_item);
+		
+		this.setJMenuBar(barra);
+		
+		//contenido del panel 
+		
+		JLabel users_tag = new JLabel("USUARIOS",0);
+		users_tag.setSize(300, 80);
+		users_tag.setFont( new Font("Marker Felt", Font.BOLD, 40) );
+		users_tag.setForeground(Color.white);
+		users_tag.setLocation(350, 20);
+		users_tag.setOpaque(true);
+		users_tag.setBackground(Color.black);
+		admin_panel.add(users_tag);
+		
+		JLabel title_widget = new JLabel("Total de usuarios",0);
+		title_widget.setFont( new Font("Marker Felt", Font.BOLD, 20) );
+		title_widget.setBounds(40, 120, 300, 40); 
+		title_widget.setForeground(Color.white);
+		admin_panel.add(title_widget);
+		
+		JLabel content_widget = new JLabel("100",0);
+		content_widget.setFont( new Font("Marker Felt", Font.BOLD, 30) );
+		content_widget.setBounds(40, 160, 300, 40); 
+		content_widget.setForeground(Color.white);
+		admin_panel.add(content_widget);
+		
+		JLabel widget = new JLabel("");
+		widget.setBounds(40, 120, 300, 100);
+		widget.setOpaque(true);
+		widget.setBackground(Color.black);
+		admin_panel.add(widget);
+		
+		JButton donwload = new JButton("Exportar");
+		donwload.setBounds(750, 230, 100, 40); 
+		admin_panel.add(donwload);
+		
+		JButton add_user = new JButton("Añadir");
+		add_user.setBounds(860, 230, 100, 40);
+		admin_panel.add(add_user);
+		
+		String table_titles[] = { "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" };
+		
+		String table_data[][]= {
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" },
+				{ "No. Control", "Nombre", "Appellidos","Semestre","Promedio","Acciones" }
+		};
+		
+		JTable table_users = new JTable(table_data,table_titles);
+		//table_users.setBounds(40, 280, 920, 300);
+		JScrollPane table_scroll = new JScrollPane(table_users);
+		table_scroll.setBounds(40, 280, 920, 300);
+		
+		table_scroll.setOpaque(true);
+		table_scroll.setBackground(Color.gray);
+		
+		admin_panel.add(table_scroll);
+		
+		/*JLabel tabla = new JLabel("");
+		tabla.setBounds(40, 280, 920, 300);
+		tabla.setOpaque(true);
+		tabla.setBackground(Color.black);
+		admin_panel.add(tabla);*/
+		
+		// añadir una tabla
+		
+		this.add(admin_panel);
 		
 	}
 }
