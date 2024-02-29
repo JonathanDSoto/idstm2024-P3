@@ -1,8 +1,13 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -48,10 +53,66 @@ public class Ventana extends JFrame{
 		//this.registro();
 		//this.admin();
 		
-		//this.calculadora();
+		this.calculadora();
 		
 		this.repaint();
 		this.validate();
+	}
+	
+	public void calculadora(){
+		
+		this.setSize(480,650);
+		
+		JPanel panel = new JPanel();
+		panel.setSize(this.getWidth(), this.getHeight());
+		panel.setBackground(Color.decode("#E16D8D") );
+		panel.setLayout( new BorderLayout() );
+		
+		JLabel text = new JLabel("100.00",4);
+		text.setOpaque(true);
+		text.setBackground(Color.WHITE);
+		text.setFont( new Font("Marker Felt", Font.BOLD, 40) );
+		panel.add(text, BorderLayout.NORTH);
+		
+		JPanel centro = new JPanel();
+		centro.setBackground(Color.decode("#E16DD8"));
+		centro.setLayout(new GridLayout(4,3,10,10));
+		panel.add(centro,BorderLayout.CENTER);
+		
+		String btns[] = {"7","8","9","6","5","4","3","2","1","0",".","/"};
+		for (int i = 0; i < 12; i++) {
+			 
+			JButton boton = new JButton(btns[i]);
+			centro.add(boton);
+		}
+		
+		JPanel east = new JPanel();
+		east.setBackground(Color.decode("#B7E16D"));
+		east.setLayout(new GridLayout(3,1,20,20));
+		panel.add(east,BorderLayout.EAST);
+		
+		String btns2[] = {"+","-","="};
+		for (int i = 0; i < 3; i++) {
+			 
+			JButton boton = new JButton(btns2[i]);
+			boton.setSize(100, 100);
+			east.add(boton);
+		}
+		
+		JPanel west = new JPanel();
+		west.setBackground(Color.DARK_GRAY);
+		west.setLayout( new BoxLayout(west,BoxLayout.Y_AXIS) );
+		panel.add(west,BorderLayout.WEST);
+		
+		String btns3[] = {"MC","M+","*"};
+		for (int i = 0; i < 3; i++) {
+			 
+			JButton boton = new JButton(btns3[i]);
+			west.add(boton);
+		}
+		
+		this.add(panel);
+		
 	}
 	
 	public void login() {
