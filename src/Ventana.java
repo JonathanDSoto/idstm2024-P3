@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -30,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -117,10 +119,12 @@ public class Ventana extends JFrame{
 	*/
 	public void iniciarComponentes() {
 		
-		this.login();
-		this.registro();
+		//this.login();
+		//this.registro();
 		//this.admin(); 
-		//this.calculadora();  
+		//this.calculadora(); 
+		
+		this.botones();
 		
 		this.repaint();
 		this.validate();
@@ -539,6 +543,55 @@ public class Ventana extends JFrame{
 		
 	}
 
+	public void botones() {
+		
+		this.setSize(500, 750); 
+		
+		//panel 
+		JPanel btn_panel = new JPanel();
+		btn_panel.setSize(this.getWidth(), this.getHeight());
+		btn_panel.setLocation(0,0);
+		btn_panel.setBackground(Color.decode("#6DE19B"));
+		btn_panel.setLayout(null);
+		
+		
+		JButton super_boton = new JButton("Click me!");
+		super_boton.setBounds(50, 530, 400, 70);
+		super_boton.setFont( new Font("Marker Felt", Font.BOLD, 30) );
+		btn_panel.add(super_boton);
+		
+		super_boton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int x = (int)Math.floor(Math.random()*450+1);
+				int y = (int)Math.floor(Math.random()*650+1);
+				
+				int w = (int)Math.floor(Math.random()*120+1);
+				int h = (int)Math.floor(Math.random()*120+1);
+				
+				Random rand = new Random();
+				float r = rand.nextFloat();
+				float g = rand.nextFloat();
+				float b = rand.nextFloat();
+				
+				JButton otro_boton = new JButton(r+","+g +","+b);
+				otro_boton.setBounds(x, y, w, h); 
+				otro_boton.setOpaque(true);
+				otro_boton.setBackground(new Color(r, g, b));
+				
+				btn_panel.add(otro_boton);
+				
+				getContentPane().repaint();
+				getContentPane().revalidate();
+				
+			}
+			
+		});
+		
+		this.add(btn_panel);
+	}
 	
 
 	 
