@@ -1,11 +1,23 @@
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -44,16 +56,71 @@ public class Ventana extends JFrame{
 		
 		this.setLayout(null);//quitar el molde
 		
-		this.iniciarComponentes();
+		this.iniciarComponentes(); 
+		
+		//this.addMouseListener(this);
+	} 
+	
+	/*
+	@Override
+	public void paint(Graphics g){
+		super.paint(g);
+		
+		Graphics2D g2d = (Graphics2D) g;
+        
+		//asigna un color
+        g2d.setColor(Color.BLUE); 
+        
+        g2d.fillRect(50,50,200,100);
+        
+        g2d.clearRect(100, 100, 100, 100);
+        
+        g2d.fillArc(300, 300, 100, 100, 45, 180);
+        g2d.drawArc(320, 280, 100, 100, 45, 180);
+        
+        g2d.setColor(Color.black);
+        
+        g2d.drawLine(0, 0, 500, 500);
+        
+        g2d.drawOval(400, 400, 50, 80);
+        g2d.fillOval(350, 400, 50, 80);
+        
+        int xPoints[] = {100,250,300};
+        int yPoints[] = {100,200,350}; 
+        
+        g2d.drawPolyline(xPoints, yPoints, 3);
+        
+        g2d.setColor(Color.red);
+        
+        g2d.fillPolygon(xPoints, yPoints, 3);
+        
+        g2d.setFont( new Font("Marker Felt", Font.BOLD, 40) );
+        
+        g2d.drawString("Hola", 250, 100);
+        
+        g2d.setStroke(new BasicStroke(10));
+        
+        g2d.drawRoundRect(420, 150, 200, 150, 10, 10); 
+        
+        try { 
+        	
+			BufferedImage image = ImageIO.read(new File("src/polluelo.png"));  
+			
+			g2d.drawImage(image, 0, 0, null);
+        
+        
+        } catch (IOException e) { 
+			e.printStackTrace();
+		} 
 	}
 	
+	*/
 	public void iniciarComponentes() {
 		
-		//this.login();
-		//this.registro();
-		//this.admin();
-		
-		this.calculadora();
+		this.login();
+		this.registro();
+		//this.admin(); 
+		//this.calculadora();  
 		
 		this.repaint();
 		this.validate();
@@ -117,6 +184,8 @@ public class Ventana extends JFrame{
 	
 	public void login() {
 		
+		//this.setSize(500, 750);
+		
 		JPanel login = new JPanel();
 		login.setSize(this.getWidth()/2, this.getHeight());
 		login.setBackground(Color.gray);
@@ -132,10 +201,10 @@ public class Ventana extends JFrame{
 		login.add(login_tag);
 		
 		
-		JLabel logo = new JLabel(); 
+		/*JLabel logo = new JLabel(); 
 		logo.setIcon( new ImageIcon(getClass().getResource("polluelo.png")) );
 		logo.setBounds(100, 50, 100, 100);
-		login.add(logo);
+		login.add(logo);*/
 		
 		
 		JLabel usr_tag = new JLabel("NOMBRE DE USUARIO: ");
@@ -168,6 +237,47 @@ public class Ventana extends JFrame{
 		JButton login_btn = new JButton("Acceder");
 		login_btn.setBounds(50, 360, 200, 70);
 		login_btn.setFont( new Font("Marker Felt", Font.BOLD, 30) );
+		
+		login_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Hola");
+				
+				String usr = usr_field.getText();  
+				String pwd = new String(pwd_field.getPassword());
+				
+				
+				
+				if(usr.length()<=0 ) {
+					
+					usr_field.setBorder(BorderFactory.createLineBorder(Color.red,2));
+					
+				}else {
+					usr_field.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				if(pwd.length()<=0 ) {
+					
+					pwd_field.setBorder(BorderFactory.createLineBorder(Color.red,2));
+					
+				}else {
+					pwd_field.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				
+				
+				
+				if(usr.equals("SuperUser")) {
+					if(pwd.equals("SuperPass")) {
+						
+						System.out.println("Bienvenido");
+					}
+					
+				}else {
+					System.out.println("Usuario no encontrado");
+				}
+				
+			}});
+		
 		login.add(login_btn);
 		
 		//size
@@ -180,6 +290,8 @@ public class Ventana extends JFrame{
 	}
 	
 	public void registro() {
+		
+		//this.setSize(500, 750);
 		
 		JPanel registro = new JPanel();
 		registro.setSize(this.getWidth()/2, this.getHeight());
@@ -273,6 +385,39 @@ public class Ventana extends JFrame{
 		rgs_btn.setBounds(50, 530, 400, 70);
 		rgs_btn.setFont( new Font("Marker Felt", Font.BOLD, 30) );
 		registro.add(rgs_btn);
+		
+		rgs_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String usr = usr_field.getText();
+				String bio = bio_tex.getText();
+				 
+				
+				if(usr.length()<=0) { 
+					usr_field.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}else {
+					usr_field.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				
+				if(bio.length()<=0) { 
+					bio_tex.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}else{
+					bio_tex.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				 
+				if( !accept_radio.isSelected() ) {
+					
+					accept_radio.setBorderPainted(true);
+					accept_radio.setBorder(BorderFactory.createLineBorder(Color.red,2));
+				}else {
+					accept_radio.setBorderPainted(true);
+					accept_radio.setBorder(BorderFactory.createLineBorder(Color.green,2));
+				}
+				//accept_radio
+			}
+		});
 		
 		this.add(registro); 
 		
@@ -393,4 +538,8 @@ public class Ventana extends JFrame{
 		this.add(admin_panel);
 		
 	}
+
+	
+
+	 
 }
