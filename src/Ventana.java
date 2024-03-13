@@ -580,7 +580,21 @@ public class Ventana extends JFrame{
 				otro_boton.setBounds(x, y, w, h); 
 				otro_boton.setOpaque(true);
 				otro_boton.setBackground(new Color(r, g, b));
-				
+				otro_boton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						 String command = ((JButton) e.getSource()).getText(); 
+						
+						System.out.println( command );
+						
+						JOptionPane.showMessageDialog(null,
+								command,
+							    "Inane warning",
+							    JOptionPane.WARNING_MESSAGE);
+						
+					}});
 				btn_panel.add(otro_boton);
 				
 				getContentPane().repaint();
