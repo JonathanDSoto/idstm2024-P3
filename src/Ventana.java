@@ -40,8 +40,9 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Ventana extends JFrame{
+public class Ventana extends JFrame implements MouseListener{
 	
+	JPanel btn_panel;
 	//contructor que define los atributos base
 	//de mi ventana
 	public Ventana(){
@@ -60,7 +61,7 @@ public class Ventana extends JFrame{
 		
 		this.iniciarComponentes(); 
 		
-		//this.addMouseListener(this);
+		this.addMouseListener(this);
 	} 
 	
 	/*
@@ -548,12 +549,11 @@ public class Ventana extends JFrame{
 		this.setSize(500, 750); 
 		
 		//panel 
-		JPanel btn_panel = new JPanel();
+		btn_panel = new JPanel();
 		btn_panel.setSize(this.getWidth(), this.getHeight());
 		btn_panel.setLocation(0,0);
 		btn_panel.setBackground(Color.decode("#6DE19B"));
 		btn_panel.setLayout(null);
-		
 		
 		JButton super_boton = new JButton("Click me!");
 		super_boton.setBounds(50, 530, 400, 70);
@@ -602,9 +602,74 @@ public class Ventana extends JFrame{
 				
 			}
 			
-		});
+		}); 
 		
 		this.add(btn_panel);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		int x = e.getX() ;
+		int y = e.getY();
+		
+		int w = (int)Math.floor(Math.random()*120+1);
+		int h = (int)Math.floor(Math.random()*120+1);
+		
+		Random rand = new Random();
+		float r = rand.nextFloat();
+		float g = rand.nextFloat();
+		float b = rand.nextFloat();
+		
+		JButton otro_boton = new JButton(r+","+g +","+b);
+		otro_boton.setBounds(x, y, w, h); 
+		otro_boton.setOpaque(true);
+		otro_boton.setBackground(new Color(r, g, b));
+		otro_boton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 String command = ((JButton) e.getSource()).getText(); 
+				
+				System.out.println( command );
+				
+				JOptionPane.showMessageDialog(null,
+						command,
+					    "Inane warning",
+					    JOptionPane.WARNING_MESSAGE);
+				
+			}});
+		btn_panel.add(otro_boton);
+		
+		getContentPane().repaint();
+		getContentPane().revalidate();
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
