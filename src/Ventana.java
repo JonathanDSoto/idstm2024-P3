@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,11 +11,14 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -40,7 +44,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Ventana extends JFrame implements MouseListener{
+public class Ventana extends JFrame implements MouseListener, KeyListener{
 	
 	JPanel btn_panel;
 	//contructor que define los atributos base
@@ -62,6 +66,8 @@ public class Ventana extends JFrame implements MouseListener{
 		this.iniciarComponentes(); 
 		
 		this.addMouseListener(this);
+		
+		this.addKeyListener(this);
 	} 
 	
 	/*
@@ -120,12 +126,12 @@ public class Ventana extends JFrame implements MouseListener{
 	*/
 	public void iniciarComponentes() {
 		
-		//this.login();
+		this.login();
 		//this.registro();
 		//this.admin(); 
 		//this.calculadora(); 
 		
-		this.botones();
+		//this.botones();
 		
 		this.repaint();
 		this.validate();
@@ -576,6 +582,7 @@ public class Ventana extends JFrame implements MouseListener{
 				float g = rand.nextFloat();
 				float b = rand.nextFloat();
 				
+				
 				JButton otro_boton = new JButton(r+","+g +","+b);
 				otro_boton.setBounds(x, y, w, h); 
 				otro_boton.setOpaque(true);
@@ -585,14 +592,21 @@ public class Ventana extends JFrame implements MouseListener{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
-						 String command = ((JButton) e.getSource()).getText(); 
+						JButton yo = ((JButton) e.getSource()); 
+						btn_panel.remove(yo);
 						
-						System.out.println( command );
+						getContentPane().repaint();
+						getContentPane().revalidate();
 						
-						JOptionPane.showMessageDialog(null,
+						String command = ((JButton) e.getSource()).getText(); 
+						
+						//System.out.println( command );
+						
+						/*JOptionPane.showMessageDialog(null,
 								command,
-							    "Inane warning",
-							    JOptionPane.WARNING_MESSAGE);
+							    "Inane warning",+
+							    JOptionPane.WARNING_MESSAGE);*/
+						 
 						
 					}});
 				btn_panel.add(otro_boton);
@@ -639,7 +653,7 @@ public class Ventana extends JFrame implements MouseListener{
 				
 				 String command = ((JButton) e.getSource()).getText(); 
 				
-				System.out.println( command );
+				//System.out.println( command );
 				
 				JOptionPane.showMessageDialog(null,
 						command,
@@ -664,10 +678,64 @@ public class Ventana extends JFrame implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+		Random obj = new Random();
+		int rand_num = obj.nextInt(0xffffff + 1); 
+		String colorCode = String.format("#%06x", rand_num);
+		
+		btn_panel.setBackground(Color.decode(colorCode));
+		
+		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println( e.getKeyCode() + " "+ e.getKeyChar() );
+		
+		if(e.getKeyCode() == 8) {
+			
+			btn_panel.removeAll();
+			getContentPane().repaint();
+			getContentPane().revalidate();
+		}
+		
+		if(e.getKeyCode() == 87) {
+			
+			Component[] elementos = btn_panel.getComponents();
+			
+			for (int i = 0; i < elementos.length; i++) { 
+				  
+				if( elementos[i].getClass().toString().equals("class javax.swing.JButton") ) {
+					
+					JButton btn = ((JButton) elementos[i]); 
+					
+					btn.setSize(btn.getHeight()+10, btn.getWidth()+10);
+					
+					getContentPane().repaint();
+					getContentPane().revalidate();
+					
+				}
+				
+			}
+			
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
