@@ -38,7 +38,6 @@ public class Sysmtem {
 	private JPanel panel_2;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
 	/**
 	 * Launch the application.
 	 */
@@ -72,7 +71,7 @@ public class Sysmtem {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 440, 414);
+		frame.setBounds(100, 100, 456, 535);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -111,7 +110,7 @@ public class Sysmtem {
 		
 		
 		
-		panel.setBackground(new Color(255, 177, 47));
+		panel.setBackground(new Color(255, 242, 84));
 		panel.setForeground(new Color(255, 83, 46));
 		//frame.getContentPane().add(panel);
 		
@@ -120,6 +119,7 @@ public class Sysmtem {
 		panel.setLayout(new GridLayout(3, 3, 0, 0));
 		
 		btnNewButton = new JButton("");
+		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton_2 = new JButton("");
 		btnNewButton_1 = new JButton("");
 		btnNewButton_3 = new JButton("");
@@ -218,20 +218,17 @@ public class Sysmtem {
 		
 		panel_2 = new JPanel();
 		panel_1.add(panel_2, BorderLayout.NORTH);
-		
-		lblNewLabel = new JLabel("X: 0");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel);
-		
-		lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		panel_2.add(lblNewLabel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		lblNewLabel_1 = new JLabel("0:0");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 23));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_1);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_2.add(lblNewLabel_1, BorderLayout.EAST);
+		
+		lblNewLabel = new JLabel("X: 0");
+		panel_2.add(lblNewLabel, BorderLayout.WEST);
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
 	public void click(JButton btn) {
