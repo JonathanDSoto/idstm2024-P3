@@ -1,11 +1,14 @@
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -16,9 +19,15 @@ public class Pacman extends JFrame implements KeyListener{
 
 	//private JFrame frame;
 	public int x=225,y=225;
+	public int dir = 0;
 	Player jp = new Player(x,y,25,25,"#68FF33");
 	
-	Player obstaculo = new Player(100,100,25,125,"#33CAFF");
+	Player obstaculos[] = {
+				new Player(100,100,25,125,"#33CAFF"),
+				new Player(400,400,25,125,"#FFAC33"),
+				new Player(0,400,125,25,"#45A9AE")
+				};
+	
 	
 	/**
 	 * Launch the application.
@@ -64,7 +73,19 @@ public class Pacman extends JFrame implements KeyListener{
 		this.getContentPane().add(panel_1, BorderLayout.CENTER);
 		
 		this.addKeyListener(this);
+		
+		Timer timer = new Timer(100, new ActionListener() {
+		    public void actionPerformed(ActionEvent evt) { 
+		         
+		    	update(); 
+		    }    
+		});
+		
+		timer.start();
+
 	}
+	
+	 
 	
 	@Override
 	public void paint(Graphics g){
@@ -75,13 +96,11 @@ public class Pacman extends JFrame implements KeyListener{
 		g2d.setColor(Color.decode( jp.getC() ));  
 		g2d.fillRect(jp.getX(),jp.getY(),jp.getW(),jp.getH());  
 		
-		
-		g2d.setColor(Color.decode( obstaculo.getC() ));  
-		g2d.fillRect(obstaculo.getX(),obstaculo.getY(),obstaculo.getW(),obstaculo.getH()); 
-		
-		//g2d.setColor(Color.green);  
-        //g2d.fillRect(x,y,25,25);  
-        
+		for (Player obstaculo : obstaculos) {
+			
+			g2d.setColor(Color.decode( obstaculo.getC() ));  
+			g2d.fillRect(obstaculo.getX(),obstaculo.getY(),obstaculo.getW(),obstaculo.getH()); 
+		}
         
 	}
 
@@ -94,30 +113,72 @@ public class Pacman extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println(e.getKeyCode());
+		//System.out.println(e.getKeyCode());  
 		
 		switch (e.getKeyCode()) {
-			case 87: //w   
-				jp.setY( jp.getY()-10 );
+			case 87: //w    
+				dir = 1;
 			break;
-			case 83: //s 
-				jp.setY( jp.getY()+10 );
+			case 83: //s  
+				dir = 2;
 				break;
-			case 68: //d
-				jp.setX( jp.getX()+10 );
+			case 68: //d 
+				dir = 3;
 				break;
-			case 65: //d
-				jp.setX( jp.getX()-10 );
+			case 65: //a
+				dir = 4;
 				break;
 			default:
 			break;
+		} 
+		
+		
+	}
+	
+	public void update() {
+		
+		
+		switch (dir) {
+			case 1: //w   
+				jp.setY( jp.getY()-10 ); 
+			break;
+			case 2: //s 
+				jp.setY( jp.getY()+10 ); 
+				break;
+			case 3: //d
+				jp.setX( jp.getX()+10 ); 
+				break;
+			case 4: //a
+				jp.setX( jp.getX()-10 ); 
+				break;
+			default:
+			break;
+		} 
+		
+		for (Player obstaculo : obstaculos) { 
+			
+			if(jp.colision(obstaculo)) {  
+				
+				if(dir==1) {
+					jp.setY( jp.getY()+10 );
+				}
+				if(dir==2) {
+					jp.setY( jp.getY()-10 );
+				}
+				if(dir==3) {
+					jp.setX( jp.getX()-10 );
+				}
+				if(dir==4) {
+					jp.setX( jp.getX()+10 ); 
+				}
+			} 
 		}
 		
-		System.out.println( jp.colision(obstaculo) );
 		
 		this.update(getGraphics()); 
+		
 	}
-
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub

@@ -59,8 +59,19 @@ public class Player {
 	
 	public boolean colision(Player p) {
 		
-		if(this.x + this.w > p.x) {
-			return true;
+		/*if (r1x + r1w >= r2x &&     // r1 right edge past r2 left
+		  r1x <= r2x + r2w &&       // r1 left edge past r2 right
+		  r1y + r1h >= r2y &&       // r1 top edge past r2 bottom
+		  r1y <= r2y + r2h) {       // r1 bottom edge past r2 top
+		    return true;
+		}*/
+		
+		if( this.x + this.w > p.x &&  this.x < p.x + p.w &&
+				
+			this.y + this.h > p.y && this.y < p.y + p.h) {
+			
+			return true; 
+			
 		}
 		
 		return false;

@@ -10,11 +10,18 @@ import javax.swing.JMenuItem;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Plataforma {
 
@@ -195,6 +202,23 @@ public class Plataforma {
         JButton btnNewButton = new JButton("Acceder");
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
+        		System.out.println("Hola");
+        		
+        		JSONParser parser = new JSONParser();
+        		/*
+        		try {
+					Object obj = parser.parse(new FileReader("users.json"));
+				
+        		
+        		
+        		
+        		
+        		} catch (IOException | ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        		*/
         	}
         });
         btnNewButton.setBounds(71, 300, 267, 41);

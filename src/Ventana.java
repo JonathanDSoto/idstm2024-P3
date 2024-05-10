@@ -661,7 +661,26 @@ public class Ventana extends JFrame implements MouseListener, KeyListener{
 					    JOptionPane.WARNING_MESSAGE);
 				
 			}});
-		btn_panel.add(otro_boton);
+		
+		try {
+			
+			int[] myNumbers = {1, 2, 3};
+		      System.out.println(myNumbers[1]);
+			
+			if(btn_panel!=null)
+				btn_panel.add(otro_boton);
+		
+		}catch(ArrayIndexOutOfBoundsException ep) {
+			System.out.println("superó el límite de elementos");
+		} 
+		catch(Exception ep) {
+			System.out.println("Hola :p");
+			System.out.println(ep.toString());
+		
+		}finally {
+			System.out.println("bye");
+		}
+		
 		
 		getContentPane().repaint();
 		getContentPane().revalidate();
@@ -678,12 +697,21 @@ public class Ventana extends JFrame implements MouseListener, KeyListener{
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		Random obj = new Random();
-		int rand_num = obj.nextInt(0xffffff + 1); 
-		String colorCode = String.format("#%06x", rand_num);
+		try { 
 		
-		btn_panel.setBackground(Color.decode(colorCode));
+			Random obj = new Random();
+			int rand_num = obj.nextInt(0xffffff + 1); 
+			String colorCode = String.format("#%06x", rand_num);
+			
+			if(btn_panel != null) {
+				btn_panel.setBackground(Color.decode(colorCode));
+			}
+			
 		
+		}catch(Exception ep) {
+			System.out.println("Hola :p");
+			System.out.println(ep.toString());
+		}
 		
 	}
 
