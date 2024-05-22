@@ -70,7 +70,8 @@ public class AuthView {
         	public void actionPerformed(ActionEvent e) {
         		
         		 
-        		auth.login(textField.getText(),textField_1.getText());
+        		if( auth.login(textField.getText(),textField_1.getText()) )
+        			frame.dispose();
         		 
         	}
         });
